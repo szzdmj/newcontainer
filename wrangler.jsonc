@@ -1,31 +1,22 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "newcontainer",
-  "main": "src/index.ts",
-  "compatibility_date": "2025-05-23",
-  "compatibility_flags": ["nodejs_compat"],
-  "observability": {
-    "enabled": true
-  },
+  "name": "shenzhou-app-to-cloudflare",
+  "compatibility_date": "2024-04-18",
+  "compatibility_flags": [],
   "containers": [
     {
-      "class_name": "MyContainer",
-      "image": "./Dockerfile",
-      "max_instances": 10
+      "name": "mycontainer",
+      "image": "ghcr.io/szzdmj/shenzhou-app:latest",
+      "durable_objects": {
+        "binding": "MY_CONTAINER"
+      }
     }
   ],
   "durable_objects": {
     "bindings": [
       {
-        "class_name": "MyContainer",
-        "name": "MY_CONTAINER"
+        "name": "MY_CONTAINER",
+        "class_name": "MyContainer"
       }
     ]
-  },
-  "migrations": [
-    {
-      "new_sqlite_classes": ["MyContainer"],
-      "tag": "v1"
-    }
-  ]
+  }
 }
