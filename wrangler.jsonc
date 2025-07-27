@@ -1,14 +1,8 @@
 {
-  "name": "shenzhou-app-to-cloudflare",
-  "main": "src/worker.ts", // 👈 指定入口文件
-  "compatibility_date": "2024-04-18",
-  "containers": [
-    {
-      "name": "mycontainer",
-      "image": "ghcr.io/szzdmj/shenzhou-app:latest",
-      "class_name": "MyContainer"
-    }
-  ],
+  "name": "frankenphpnew",
+  "compatibility_date": "2024-06-20",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "src/worker.ts",
   "durable_objects": {
     "bindings": [
       {
@@ -17,10 +11,10 @@
       }
     ]
   },
-  "migrations": [
+  "containers": [
     {
-      "tag": "v1",
-      "new_classes": ["MyContainer"]
+      "binding": "MY_CONTAINER",
+      "image": "ghcr.io/szzdmj/shenzhou-app"
     }
   ]
 }
