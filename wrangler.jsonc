@@ -4,7 +4,7 @@
   "compatibility_date": "2025-07-26",
   "compatibility_flags": ["nodejs_compat"],
 
-  // 注册 Durable Object 并添加 migration
+  // Durable Object 注册
   "durable_objects": {
     "bindings": [
       {
@@ -13,6 +13,8 @@
       }
     ]
   },
+
+  // Durable Object migration
   "migrations": [
     {
       "tag": "v1",
@@ -20,11 +22,11 @@
     }
   ],
 
-  // Container 正确写法是数组形式
+  // ✅ 修正后的 containers 配置
   "containers": [
     {
       "name": "shenzhou-app-to-cloudflare-mycontainer",
-      "service": "MY_CONTAINER",
+      "class_name": "MyContainer", // 🔧 必须字段
       "image": "ghcr.io/szzdmj/shenzhou-app:latest",
       "instance_type": "dev"
     }
