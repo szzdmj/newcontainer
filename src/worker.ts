@@ -1,13 +1,9 @@
-import { defineContainer } from '@cloudflare/containers';
+// src/worker.ts
+
+export class MyContainer {} // 必须导出，否则部署失败
 
 export default {
-  async fetch(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-    const id = env.MY_CONTAINER.idFromName('single-instance');
-    const stub = env.MY_CONTAINER.get(id);
-    return stub.fetch(req);
+  async fetch(request: Request, env: any) {
+    return await env.MY_CONTAINER.fetch(request)
   },
-};
-
-export interface Env {
-  MY_CONTAINER: ReturnType<typeof defineContainer>;
 }
