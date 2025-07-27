@@ -6,9 +6,7 @@
     {
       "name": "mycontainer",
       "image": "ghcr.io/szzdmj/shenzhou-app:latest",
-      "durable_objects": {
-        "binding": "MY_CONTAINER"
-      }
+      "class_name": "MyContainer" // 👈 必须字段
     }
   ],
   "durable_objects": {
@@ -18,5 +16,11 @@
         "class_name": "MyContainer"
       }
     ]
-  }
+  },
+  "migrations": [
+    {
+      "tag": "v1", // 第一次部署可用 "v1"
+      "new_classes": ["MyContainer"]
+    }
+  ]
 }
