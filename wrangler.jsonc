@@ -13,8 +13,14 @@
   },
   "containers": [
     {
-      "binding": "MY_CONTAINER",
+      "class_name": "MyContainer",
       "image": "ghcr.io/szzdmj/shenzhou-app"
+    }
+  ],
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_classes": ["MyContainer"]
     }
   ]
 }
