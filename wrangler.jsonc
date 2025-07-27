@@ -1,12 +1,10 @@
 {
   "name": "shenzhou-app-to-cloudflare",
+  "main": "src/worker.ts",
   "compatibility_date": "2025-07-26",
   "compatibility_flags": ["nodejs_compat"],
 
-  // 使用模块化 Worker 语法（适配 Durable Object）
-  "main": "src/worker.ts",
-  "node_compat": true,
-
+  // 注册 Durable Object 并添加 migration
   "durable_objects": {
     "bindings": [
       {
@@ -15,17 +13,20 @@
       }
     ]
   },
-  "services": [],
-  "routes": [],
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_classes": ["MyContainer"]
+    }
+  ],
 
-  "containers": {
-    "bindings": [
-      {
-        "name": "shenzhou-app-to-cloudflare-mycontainer",
-        "service": "MY_CONTAINER",
-        "image": "ghcr.io/szzdmj/shenzhou-app:latest",
-        "instance_type": "dev"
-      }
-    ]
-  }
+  // Container 正确写法是数组形式
+  "containers": [
+    {
+      "name": "shenzhou-app-to-cloudflare-mycontainer",
+      "service": "MY_CONTAINER",
+      "image": "ghcr.io/szzdmj/shenzhou-app:latest",
+      "instance_type": "dev"
+    }
+  ]
 }
