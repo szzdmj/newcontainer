@@ -1,12 +1,12 @@
 {
   "name": "shenzhou-app-to-cloudflare",
+  "main": "src/worker.ts", // 👈 指定入口文件
   "compatibility_date": "2024-04-18",
-  "compatibility_flags": [],
   "containers": [
     {
       "name": "mycontainer",
       "image": "ghcr.io/szzdmj/shenzhou-app:latest",
-      "class_name": "MyContainer" // 👈 必须字段
+      "class_name": "MyContainer"
     }
   ],
   "durable_objects": {
@@ -19,7 +19,7 @@
   },
   "migrations": [
     {
-      "tag": "v1", // 第一次部署可用 "v1"
+      "tag": "v1",
       "new_classes": ["MyContainer"]
     }
   ]
