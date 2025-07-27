@@ -3,9 +3,10 @@
   "compatibility_date": "2024-07-01",
   "compatibility_flags": ["nodejs_compat"],
   "main": "src/worker.ts",
-  "build": {
-    "command": "npm run build"
-  },
+  // ❌ 删除以下这段
+  // "build": {
+  //   "command": "npm run build"
+  // },
   "durable_objects": {
     "bindings": [
       {
