@@ -1,12 +1,8 @@
 {
-  "name": "shenzhou-app-to-cloudflare",
-  "compatibility_date": "2024-07-01",
+  "name": "shenzhou-app-to-cloudflare", // ✅ 必须与你部署时使用的 Worker 名一致
+  "compatibility_date": "2024-05-01",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "src/worker.ts",
-  // ❌ 删除以下这段
-  // "build": {
-  //   "command": "npm run build"
-  // },
+  "node_compat": true,
   "durable_objects": {
     "bindings": [
       {
@@ -15,16 +11,13 @@
       }
     ]
   },
-  "migrations": [
-    {
-      "tag": "v1",
-      "new_classes": ["MyContainer"]
-    }
-  ],
   "containers": [
     {
-      "class_name": "MyContainer",
-      "image": "ghcr.io/szzdmj/shenzhou-app:latest"
+      "binding": "MY_CONTAINER",
+      "image": "ghcr.io/szzdmj/shenzhou-app:latest" // ✅ 你的公开镜像
     }
-  ]
+  ],
+  "build": {
+    "command": "echo done"
+  }
 }
