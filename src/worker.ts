@@ -1,27 +1,22 @@
-export interface Env {
-  MY_CONTAINER: DurableObjectNamespace;
-}
-
 export class MyContainer {
-  constructor(private state: DurableObjectState, private env: Env) {}
+  constructor(private readonly state: DurableObjectState) {}
 
   async fetch(request: Request): Promise<Response> {
     const url = new URL(request.url);
+    const containerUrl = `http://shenzhou-app-to-cloudflare-mycontainer${url.pathname}`;
 
-    // 示例：将请求转发到容器中的 Web 服务（FrankenPHP + Caddy）
-    const containerUrl = `http://localhost${url.pathname}${url.search}`;
-    const init: RequestInit = {
+    return await fetch(containerUrl, {
       method: request.method,
       headers: request.headers,
       body: request.body,
-    };
-
-    return await fetch(containerUrl, init);
+    });
   }
 }
 
 export default {
-  fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-    return env.MY_CONTAINER.fetch(request);
+  async fetch(request: Request, env: any): Promise<Response> {
+    const id = env.MY_CONTAINER.idFromName("main");
+    const stub = env.MY_CONTAINER.get(id);
+    return stub.fetch(request);
   },
 };
