@@ -21,10 +21,6 @@
     }
   ],
 
-  "build": {
-    "command": "npm install hono @cloudflare/containers"
-  },
-
   "containers": [
     {
       "image": "./Static_Creation/static-build.Dockerfile",
