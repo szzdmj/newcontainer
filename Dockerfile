@@ -74,11 +74,12 @@ RUN git clone https://github.com/e-dant/watcher . && \
 	cmake --install build
 
 # Set destination for COPY
-WORKDIR /go/src/app
-RUN git clone https://github.com/szzdmj/frankenphp . && \
-COPY ./frankenphp .
+RUN git clone https://github.com/szzdmj/frankenphp . 
+WORKDIR /go/src/app/frankenphp/caddy/frankenphp
+RUN ../../go.sh build -buildvcs=false
 
 # Download any Go modules
+WORKDIR /go/src/app
 COPY container_src/go.mod ./
 RUN go mod download
 
@@ -93,4 +94,6 @@ COPY --from=build /server /server
 EXPOSE 8080
 
 # Run
-CMD ["/server"]
+WORKDIR /go/src/app
+CMD ["/server"]&& \
+CMD [ "zsh" ]
