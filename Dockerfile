@@ -74,7 +74,8 @@ RUN git clone https://github.com/e-dant/watcher . && \
 	cmake --install build
 
 # Set destination for COPY
-RUN git clone https://github.com/szzdmj/frankenphp . 
+WORKDIR /go/src/app/frankenphp
+RUN git clone https://github.com/szzdmj/frankenphp .
 WORKDIR /go/src/app/frankenphp/caddy/frankenphp
 RUN ../../go.sh build -buildvcs=false
 
